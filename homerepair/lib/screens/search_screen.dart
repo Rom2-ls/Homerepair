@@ -24,19 +24,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Searchs"),
-          centerTitle: true,
-        ),
-        body: TabBarView(
-          children: [
-            DisplayCards(list: _allServices),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Searchs"),
+        centerTitle: true,
       ),
+      body: DisplayCards(list: _allServices),
     );
   }
 }
