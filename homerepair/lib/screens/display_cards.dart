@@ -1,39 +1,26 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key, required this.title}) : super(key: key);
+class DisplayCards extends StatefulWidget {
+  DisplayCards({Key? key, required this.title, required this.list})
+      : super(key: key);
   final String title;
+  List<Map<String, dynamic>> list = [];
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _DisplayCardsState createState() => _DisplayCardsState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _DisplayCardsState extends State<DisplayCards> {
   TextEditingController editingController = TextEditingController();
-  RangeValues _currentRangeValues = const RangeValues(0, 100);
-
-  // je dois retourner une liste venant de la base de donnée
-
-  final List<Map<String, dynamic>> _allUsers = [
-    {"name": "Andy", "age": 29},
-    {"name": "Aragon", "age": 40},
-    {"name": "Bob", "age": 5},
-    {"name": "Barbara", "age": 35},
-    {"name": "Candy", "age": 21},
-    {"name": "Colin", "age": 55},
-    {"name": "Audra", "age": 30},
-    {"name": "Banana", "age": 14},
-    {"name": "Caversky", "age": 100},
-    {"name": "Becky", "age": 32},
-  ];
 
   List<Map<String, dynamic>> _foundUsers = [];
-  var items = <String>[];
 
   @override
   initState() {
     // at the beginning, all users are shown
-    _foundUsers = _allUsers;
+    _foundUsers = widget.list;
     super.initState();
   }
 
@@ -42,9 +29,9 @@ class _SearchPageState extends State<SearchPage> {
     List<Map<String, dynamic>> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
-      results = _allUsers;
+      results = widget.list;
     } else {
-      results = _allUsers
+      results = widget.list
           .where((user) =>
               user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
@@ -60,18 +47,12 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
-        backgroundColor: Color(0xFFF4EBE8),
-        shadowColor: Color(0xFFF4EBE8),
-      ),
       backgroundColor: Color(0xFFEDECF2),
       body: Container(
         child: Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
               child: TextField(
                 onChanged: (value) {
                   _runFilter(value);
@@ -80,25 +61,7 @@ class _SearchPageState extends State<SearchPage> {
                 decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: RangeSlider(
-                activeColor: const Color(0xFF507EBA),
-                values: _currentRangeValues,
-                max: 100,
-                divisions: 100,
-                labels: RangeLabels(
-                  _currentRangeValues.start.round().toString(),
-                  _currentRangeValues.end.round().toString(),
-                ),
-                onChanged: (RangeValues values) {
-                  setState(() {
-                    _currentRangeValues = values;
-                  });
-                },
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)))),
               ),
             ),
             Expanded(
