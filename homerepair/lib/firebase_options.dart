@@ -60,7 +60,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '333750750744',
     projectId: 'homerepair-beni-romain',
     storageBucket: 'homerepair-beni-romain.appspot.com',
-    iosClientId: '333750750744-qe2vi6an6igf243utuie32c51rfv5t6a.apps.googleusercontent.com',
+    iosClientId:
+        '333750750744-qe2vi6an6igf243utuie32c51rfv5t6a.apps.googleusercontent.com',
     iosBundleId: 'com.homerepair-beni-rom.app',
   );
 }

@@ -88,7 +88,7 @@ class SocialPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           shape: StadiumBorder(),
                           primary: d_red,
-                          padding: EdgeInsets.all(13)),
+                          padding: EdgeInsets.all(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -118,7 +118,7 @@ class SocialPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           shape: StadiumBorder(),
                           primary: Colors.white,
-                          padding: EdgeInsets.all(13)),
+                          padding: EdgeInsets.all(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -128,36 +128,6 @@ class SocialPage extends StatelessWidget {
                             'CONNEXION AVEC GOOGLE',
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          primary: Color.fromARGB(255, 7, 135, 255),
-                          padding: EdgeInsets.all(13)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FaIcon(FontAwesomeIcons.facebook),
-                          SizedBox(width: 10),
-                          Text(
-                            'CONNEXION AVEC FACEBOOK',
-                            style: TextStyle(
-                              color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
