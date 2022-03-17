@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         body: TabBarView(
           children: [
-            DisplayCards(title: "test 1", list: _allServices),
+            DisplayCards(list: _allServices),
           ],
         ),
       ),
