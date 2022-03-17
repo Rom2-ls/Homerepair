@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homerepair/screens/display_cards.dart';
+import 'package:homerepair/widget/display_cards.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);

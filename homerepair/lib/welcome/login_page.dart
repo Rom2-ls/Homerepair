@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/main.dart';
-import 'package:homerepair/delayed_animation.dart';
-import 'package:homerepair/welcome_page.dart';
-import 'package:homerepair/login_page.dart';
-import 'package:homerepair/social_page.dart';
+import 'package:homerepair/widget/delayed_animation.dart';
+import 'package:homerepair/welcome/welcome_page.dart';
+import 'package:homerepair/welcome/login_page.dart';
+import 'package:homerepair/welcome/social_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

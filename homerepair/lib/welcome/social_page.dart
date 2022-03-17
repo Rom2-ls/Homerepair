@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homerepair/main.dart';
-import 'package:homerepair/delayed_animation.dart';
-import 'package:homerepair/login_page.dart';
+import 'package:homerepair/widget/delayed_animation.dart';
+import 'package:homerepair/welcome/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
