@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homerepair/main.dart';
 import 'package:homerepair/delayed_animation.dart';
-import 'package:homerepair/welcome_page.dart';
 import 'package:homerepair/login_page.dart';
-import 'package:homerepair/social_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class SocialPage extends StatelessWidget {
   @override
@@ -44,7 +44,7 @@ class SocialPage extends StatelessWidget {
                     horizontal: 30,
                   ),
                   child: Column(
-                    children: [
+                    children: const [
                       Text(
                         "On s'occupe de tout",
                         style: TextStyle(
@@ -91,7 +91,7 @@ class SocialPage extends StatelessWidget {
                           padding: EdgeInsets.all(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(Icons.mail_outline_outlined),
                           SizedBox(width: 10),
                           Text(
@@ -105,7 +105,38 @@ class SocialPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        signInWithGoogle();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          primary: Colors.white,
+<<<<<<< HEAD
+                          padding: EdgeInsets.all(20)),
+=======
+                          padding: const EdgeInsets.all(13)),
+>>>>>>> 2f8eb7e100cccc19ddb55120357a9ea01a7fa5c6
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('images/googlelogo.png', height: 20),
+                          const SizedBox(width: 10),
+                          const Text(
+                            'CONNEXION AVEC GOOGLE',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+<<<<<<< HEAD
+=======
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -117,17 +148,17 @@ class SocialPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                           shape: StadiumBorder(),
-                          primary: Colors.white,
-                          padding: EdgeInsets.all(20)),
+                          primary: Color.fromARGB(255, 7, 135, 255),
+                          padding: EdgeInsets.all(13)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('images/googlelogo.png', height: 20),
+                          FaIcon(FontAwesomeIcons.facebook),
                           SizedBox(width: 10),
                           Text(
-                            'CONNEXION AVEC GOOGLE',
+                            'CONNEXION AVEC FACEBOOK',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
@@ -135,6 +166,7 @@ class SocialPage extends StatelessWidget {
                         ],
                       ),
                     ),
+>>>>>>> 2f8eb7e100cccc19ddb55120357a9ea01a7fa5c6
                   ],
                 ),
               ),
@@ -143,5 +175,23 @@ class SocialPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

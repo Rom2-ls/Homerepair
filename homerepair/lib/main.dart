@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homerepair/delayed_animation.dart';
-import 'package:homerepair/welcome_page.dart';
-import 'package:homerepair/login_page.dart';
-import 'package:homerepair/social_page.dart';
+import 'package:homerepair/screens/demande_screen.dart';
 
 const d_red = Color(0xFFFF595E);
 void main() {
@@ -12,9 +9,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'homerepair',
-      home: WelcomePage(),
+      home: DemandeScreen(),
     );
   }
 }

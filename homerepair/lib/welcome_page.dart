@@ -9,10 +9,10 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEDECF2),
+      backgroundColor: const Color(0xFFEDECF2),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 30,
             vertical: 60,
           ),
@@ -35,11 +35,11 @@ class WelcomePage extends StatelessWidget {
               DelayedAnimation(
                 delay: 3500,
                 child: Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     top: 30,
                     bottom: 20,
                   ),
-                  child: Text(
+                  child: const Text(
                     "On répare vos vélos et trotinettes, chez vous, partout",
                     textAlign: TextAlign.center,
                     style: TextStyle(

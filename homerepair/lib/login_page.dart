@@ -15,7 +15,7 @@ class LoginPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white.withOpacity(0),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: Colors.black,
             size: 30,
@@ -29,14 +29,14 @@ class LoginPage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(
+              margin: const EdgeInsets.symmetric(
                 vertical: 40,
                 horizontal: 30,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  DelayedAnimation(
+                  const DelayedAnimation(
                     delay: 1500,
                     child: Text(
                       'Connexion avec e-mail',
@@ -47,8 +47,8 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 22),
-                  DelayedAnimation(
+                  const SizedBox(height: 22),
+                  const DelayedAnimation(
                     delay: 1500,
                     child: Text(
                       'Il vous est recommandé de vous connecter avec un e-mail afin de mieux protéger vos informations',
@@ -59,9 +59,9 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 35),
+                  const SizedBox(height: 35),
                   LoginForm(),
-                  SizedBox(height: 125),
+                  const SizedBox(height: 125),
                   DelayedAnimation(
                     delay: 4500,
                     child: ElevatedButton(
