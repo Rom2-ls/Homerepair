@@ -113,11 +113,7 @@ class SocialPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
                           primary: Colors.white,
-<<<<<<< HEAD
                           padding: EdgeInsets.all(20)),
-=======
-                          padding: const EdgeInsets.all(13)),
->>>>>>> 2f8eb7e100cccc19ddb55120357a9ea01a7fa5c6
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -134,39 +130,6 @@ class SocialPage extends StatelessWidget {
                         ],
                       ),
                     ),
-<<<<<<< HEAD
-=======
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          primary: Color.fromARGB(255, 7, 135, 255),
-                          padding: EdgeInsets.all(13)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FaIcon(FontAwesomeIcons.facebook),
-                          SizedBox(width: 10),
-                          Text(
-                            'CONNEXION AVEC FACEBOOK',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
->>>>>>> 2f8eb7e100cccc19ddb55120357a9ea01a7fa5c6
                   ],
                 ),
               ),

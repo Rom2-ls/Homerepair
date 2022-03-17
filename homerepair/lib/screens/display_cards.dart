@@ -3,9 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 class DisplayCards extends StatefulWidget {
-  DisplayCards({Key? key, required this.title, required this.list})
-      : super(key: key);
-  final String title;
+  DisplayCards({Key? key, required this.list}) : super(key: key);
   List<Map<String, dynamic>> list = [];
 
   @override

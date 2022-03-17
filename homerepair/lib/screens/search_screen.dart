@@ -1,33 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/screens/display_cards.dart';
 
-class DemandeScreen extends StatefulWidget {
-  const DemandeScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  State<DemandeScreen> createState() => _DemandeScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _DemandeScreenState extends State<DemandeScreen> {
-  final upperTab = const TabBar(tabs: <Tab>[
-    Tab(child: Text("En attente")),
-    Tab(child: Text("Acceptée")),
-    Tab(child: Text("Refusée")),
-  ]);
-
-  final List<Map<String, dynamic>> _pendingDemandes = [
+class _SearchScreenState extends State<SearchScreen> {
+  final List<Map<String, dynamic>> _allServices = [
     {"name": "Andy", "status": "pending"},
     {"name": "Aragon", "status": "pending"},
     {"name": "Bob", "status": "pending"},
     {"name": "Barbara", "status": "pending"},
-  ];
-
-  final List<Map<String, dynamic>> _acceptedDemandes = [
     {"name": "Candy", "status": "accepted"},
     {"name": "Colin", "status": "accepted"},
-  ];
-
-  final List<Map<String, dynamic>> _rejectedDemandes = [
     {"name": "Audra", "status": "rejected"},
     {"name": "Banana", "status": "rejected"},
     {"name": "Caversky", "status": "rejected"},
@@ -40,15 +28,12 @@ class _DemandeScreenState extends State<DemandeScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Demandes"),
+          title: const Text("Searchs"),
           centerTitle: true,
-          bottom: upperTab,
         ),
         body: TabBarView(
           children: [
-            DisplayCards(list: _pendingDemandes),
-            DisplayCards(list: _acceptedDemandes),
-            DisplayCards(list: _rejectedDemandes)
+            DisplayCards(title: "test 1", list: _allServices),
           ],
         ),
       ),
