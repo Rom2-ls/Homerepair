@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homerepair/widget/display_cards.dart';
+import 'package:homerepair/widget/display_services.dart';
 
 class DemandeScreen extends StatefulWidget {
   const DemandeScreen({Key? key}) : super(key: key);
@@ -15,25 +15,6 @@ class _DemandeScreenState extends State<DemandeScreen> {
     Tab(child: Text("Refusée")),
   ]);
 
-  final List<Map<String, dynamic>> _pendingDemandes = [
-    {"name": "Andy", "status": "pending"},
-    {"name": "Aragon", "status": "pending"},
-    {"name": "Bob", "status": "pending"},
-    {"name": "Barbara", "status": "pending"},
-  ];
-
-  final List<Map<String, dynamic>> _acceptedDemandes = [
-    {"name": "Candy", "status": "accepted"},
-    {"name": "Colin", "status": "accepted"},
-  ];
-
-  final List<Map<String, dynamic>> _rejectedDemandes = [
-    {"name": "Audra", "status": "rejected"},
-    {"name": "Banana", "status": "rejected"},
-    {"name": "Caversky", "status": "rejected"},
-    {"name": "Becky", "status": "rejected"},
-  ];
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -44,11 +25,11 @@ class _DemandeScreenState extends State<DemandeScreen> {
           centerTitle: true,
           bottom: upperTab,
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            DisplayCards(list: _pendingDemandes),
-            DisplayCards(list: _acceptedDemandes),
-            DisplayCards(list: _rejectedDemandes)
+            GetService(define_status: "pending"),
+            GetService(define_status: "accepted"),
+            GetService(define_status: "rejected")
           ],
         ),
       ),
