@@ -27,9 +27,10 @@ class _DemandeScreenState extends State<DemandeScreen> {
         ),
         body: const TabBarView(
           children: [
-            GetService(define_status: "pending"),
-            GetService(define_status: "accepted"),
-            GetService(define_status: "rejected")
+            GetService(define_status: "pending", define_collection: "demandes"),
+            GetService(
+                define_status: "accepted", define_collection: "demandes"),
+            GetService(define_status: "rejected", define_collection: "demandes")
           ],
         ),
       ),
