@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/screens/demande_screen.dart';
+import 'package:homerepair/screens/profil_screen.dart';
 import 'package:homerepair/screens/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,6 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.shopping_bag_outlined),
             label: 'Demandes',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -47,5 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
   static const List<Widget> _pages = <Widget>[
     SearchScreen(),
     DemandeScreen(),
+    ProfilScreen(),
   ];
 }
