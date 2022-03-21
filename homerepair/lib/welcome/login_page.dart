@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/main.dart';
-import 'package:homerepair/delayed_animation.dart';
+import 'package:homerepair/widget/delayed_animation.dart';
 import 'package:homerepair/welcome/welcome_page.dart';
 import 'package:homerepair/welcome/login_page.dart';
 import 'package:homerepair/welcome/social_page.dart';
@@ -37,7 +37,7 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const DelayedAnimation(
-                    delay: 1000,
+                    delay: 1500,
                     child: Text(
                       'Connexion avec e-mail',
                       style: TextStyle(
@@ -49,7 +49,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 22),
                   const DelayedAnimation(
-                    delay: 500,
+                    delay: 1500,
                     child: Text(
                       'Il vous est recommandé de vous connecter avec un e-mail afin de mieux protéger vos informations',
                       style: TextStyle(
@@ -61,55 +61,33 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 35),
                   LoginForm(),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 30,
-                    ),
-                    child: DelayedAnimation(
-                      delay: 2500,
-                      child: Text(
-                        "Pas encore membre ? Inscrivez vous !",
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 105),
+                  const SizedBox(height: 125),
                   DelayedAnimation(
-                    delay: 2500,
-                    child: Container(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                    delay: 4500,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
                           shape: StadiumBorder(),
                           primary: d_red,
                           padding: EdgeInsets.symmetric(
                             horizontal: 125,
                             vertical: 13,
-                          ),
+                          )),
+                      child: Text(
+                        "S'INSCRIRE",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
-                        child: Text(
-                          "ME CONNECTER",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyApp(),
-                            ),
-                          );
-                        },
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyApp(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -164,11 +142,9 @@ class _LoginFormState extends State<LoginForm> {
                     color: Colors.black,
                   ),
                   onPressed: () {
-                    setState(
-                      () {
-                        _obscureText = !_obscureText;
-                      },
-                    );
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
                   },
                 ),
               ),
