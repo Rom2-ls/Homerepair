@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/main.dart';
-import 'package:homerepair/delayed_animation.dart';
+import 'package:homerepair/widget/delayed_animation.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
