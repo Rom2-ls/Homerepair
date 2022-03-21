@@ -5,11 +5,11 @@ import '../screens/service_info_screen.dart';
 
 class GetService extends StatefulWidget {
   const GetService(
-      {Key? key, this.define_status, required this.define_collection})
+      {Key? key, required this.defineStatus, required this.defineCollection})
       : super(key: key);
 
-  final define_status;
-  final define_collection;
+  final String defineStatus;
+  final String defineCollection;
 
   @override
   State<GetService> createState() => _GetServiceState();
@@ -35,8 +35,8 @@ class _GetServiceState extends State<GetService> {
         ),
         Expanded(
           child: DisplayServices(
-            define_status: widget.define_status,
-            define_collection: widget.define_collection,
+            defineStatus: widget.defineStatus,
+            defineCollection: widget.defineCollection,
           ),
         )
       ],
@@ -46,11 +46,11 @@ class _GetServiceState extends State<GetService> {
 
 class DisplayServices extends StatefulWidget {
   const DisplayServices(
-      {Key? key, this.define_status, required this.define_collection})
+      {Key? key, required this.defineStatus, required this.defineCollection})
       : super(key: key);
 
-  final define_status;
-  final define_collection;
+  final String defineStatus;
+  final String defineCollection;
 
   @override
   _DisplayServicesState createState() => _DisplayServicesState();
@@ -60,7 +60,7 @@ class _DisplayServicesState extends State<DisplayServices> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _servicesStream = FirebaseFirestore.instance
-        .collection(widget.define_collection)
+        .collection(widget.defineCollection)
         .snapshots();
 
     return StreamBuilder<QuerySnapshot>(
@@ -79,7 +79,7 @@ class _DisplayServicesState extends State<DisplayServices> {
             return Service(
               name: data['name'],
               status: data['status'],
-              define_status: widget.define_status,
+              defineStatus: widget.defineStatus,
             );
           }).toList(),
         );
@@ -89,24 +89,28 @@ class _DisplayServicesState extends State<DisplayServices> {
 }
 
 class Service extends StatelessWidget {
-  const Service({Key? key, this.name, this.status, this.define_status})
+  const Service(
+      {Key? key,
+      required this.name,
+      required this.status,
+      required this.defineStatus})
       : super(key: key);
 
-  final name;
-  final status;
-  final define_status;
+  final String name;
+  final String status;
+  final String defineStatus;
 
   @override
   Widget build(BuildContext context) {
-    final final_status;
+    final String finalStatus;
 
-    if (define_status == null) {
-      final_status = "";
+    if (defineStatus == "") {
+      finalStatus = "";
     } else {
-      final_status = define_status;
+      finalStatus = defineStatus;
     }
 
-    if (status == final_status) {
+    if (status == finalStatus) {
       return Padding(
         padding: const EdgeInsets.all(10),
         child: GestureDetector(

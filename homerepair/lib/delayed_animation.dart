@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:homerepair/delayed_animation.dart';
-import 'package:homerepair/welcome/welcome_page.dart';
-import 'package:homerepair/welcome/login_page.dart';
-import 'package:homerepair/welcome/social_page.dart';
 
 class DelayedAnimation extends StatefulWidget {
+  const DelayedAnimation({Key? key, required this.delay, required this.child})
+      : super(key: key);
   final Widget child;
   final int delay;
-  const DelayedAnimation({required this.delay, required this.child});
 
   @override
   _DelayedAnimationState createState() => _DelayedAnimationState();
@@ -24,14 +21,14 @@ class _DelayedAnimationState extends State<DelayedAnimation>
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 800),
     );
 
     final curve =
         CurvedAnimation(parent: _controller, curve: Curves.decelerate);
 
     _animOffset = Tween<Offset>(
-      begin: Offset(0.0, -0.35),
+      begin: const Offset(0.0, -0.35),
       end: Offset.zero,
     ).animate(curve);
 
@@ -40,6 +37,7 @@ class _DelayedAnimationState extends State<DelayedAnimation>
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _controller,

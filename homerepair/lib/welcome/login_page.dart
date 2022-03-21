@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/main.dart';
+import 'package:homerepair/screens/home_screen.dart';
+import 'package:homerepair/welcome/signup_page.dart';
 import 'package:homerepair/widget/delayed_animation.dart';
-import 'package:homerepair/welcome/welcome_page.dart';
-import 'package:homerepair/welcome/login_page.dart';
-import 'package:homerepair/welcome/social_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -35,8 +34,8 @@ class LoginPage extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const DelayedAnimation(
+                children: const [
+                  DelayedAnimation(
                     delay: 1500,
                     child: Text(
                       'Connexion avec e-mail',
@@ -47,8 +46,8 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 22),
-                  const DelayedAnimation(
+                  SizedBox(height: 22),
+                  DelayedAnimation(
                     delay: 1500,
                     child: Text(
                       'Il vous est recommandé de vous connecter avec un e-mail afin de mieux protéger vos informations',
@@ -59,37 +58,11 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 35),
+                  SizedBox(height: 35),
                   LoginForm(),
-                  const SizedBox(height: 125),
-                  DelayedAnimation(
-                    delay: 4500,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          primary: d_red,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 125,
-                            vertical: 13,
-                          )),
-                      child: Text(
-                        "S'INSCRIRE",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MyApp(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  SizedBox(height: 125),
+                  ConnexionButton(),
+                  InscriptionButton()
                 ],
               ),
             ),
@@ -101,6 +74,8 @@ class LoginPage extends StatelessWidget {
 }
 
 class LoginForm extends StatefulWidget {
+  const LoginForm({Key? key}) : super(key: key);
+
   @override
   _LoginFormState createState() => _LoginFormState();
 }
@@ -110,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 30,
       ),
       child: Column(
@@ -126,7 +101,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           DelayedAnimation(
             delay: 3500,
             child: TextField(
@@ -137,7 +112,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 labelText: 'Mot de passe',
                 suffixIcon: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.visibility,
                     color: Colors.black,
                   ),
@@ -151,6 +126,78 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class InscriptionButton extends StatelessWidget {
+  const InscriptionButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DelayedAnimation(
+      delay: 4500,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+            primary: d_red,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 125,
+              vertical: 13,
+            )),
+        child: const Text(
+          "S'INSCRIRE",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SignupPage(),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ConnexionButton extends StatelessWidget {
+  const ConnexionButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DelayedAnimation(
+      delay: 4500,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+            primary: d_red,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 125,
+              vertical: 13,
+            )),
+        child: const Text(
+          "SE CONNECTER",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ),
+          );
+        },
       ),
     );
   }

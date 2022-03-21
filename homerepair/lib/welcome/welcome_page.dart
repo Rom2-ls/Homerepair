@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/main.dart';
 import 'package:homerepair/widget/delayed_animation.dart';
-import 'package:homerepair/welcome/welcome_page.dart';
-import 'package:homerepair/welcome/login_page.dart';
 import 'package:homerepair/welcome/social_page.dart';
 
 class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,9 +56,9 @@ class WelcomePage extends StatelessWidget {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: d_red,
-                        shape: StadiumBorder(),
-                        padding: EdgeInsets.all(13)),
-                    child: Text("C'EST PARTI"),
+                        shape: const StadiumBorder(),
+                        padding: const EdgeInsets.all(13)),
+                    child: const Text("C'EST PARTI"),
                     onPressed: () {
                       Navigator.push(
                         context,

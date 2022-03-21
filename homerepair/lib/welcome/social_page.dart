@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homerepair/main.dart';
 import 'package:homerepair/widget/delayed_animation.dart';
 import 'package:homerepair/welcome/login_page.dart';
@@ -7,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SocialPage extends StatelessWidget {
+  const SocialPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +15,7 @@ class SocialPage extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white.withOpacity(0),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.black,
             size: 30,
@@ -39,7 +40,7 @@ class SocialPage extends StatelessWidget {
               child: Container(
                 height: 200,
                 child: Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                     vertical: 50,
                     horizontal: 30,
                   ),
@@ -70,7 +71,7 @@ class SocialPage extends StatelessWidget {
             DelayedAnimation(
               delay: 2500,
               child: Container(
-                margin: EdgeInsets.symmetric(
+                margin: const EdgeInsets.symmetric(
                   vertical: 14,
                   horizontal: 40,
                 ),
@@ -81,14 +82,14 @@ class SocialPage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LoginPage(),
+                            builder: (context) => const LoginPage(),
                           ),
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
+                          shape: const StadiumBorder(),
                           primary: d_red,
-                          padding: EdgeInsets.all(20)),
+                          padding: const EdgeInsets.all(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
@@ -113,7 +114,7 @@ class SocialPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
                           primary: Colors.white,
-                          padding: EdgeInsets.all(20)),
+                          padding: const EdgeInsets.all(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

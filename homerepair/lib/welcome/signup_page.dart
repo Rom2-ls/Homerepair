@@ -12,7 +12,7 @@ class SignupPage extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white.withOpacity(0),
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 30,
@@ -57,14 +57,10 @@ class SignupPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 35),
-                    SignupForm(),
-                    SizedBox(
-                      height: 50,
-                    ),
+                    const SignupForm(),
+                    const SizedBox(height: 50),
                     Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 30,
-                      ),
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
                     ),
                     const SizedBox(height: 105),
                     DelayedAnimation(
@@ -73,14 +69,14 @@ class SignupPage extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            shape: StadiumBorder(),
+                            shape: const StadiumBorder(),
                             primary: d_red,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 125,
                               vertical: 13,
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             "S'INSCRIRE",
                             style: TextStyle(
                               color: Colors.white,
@@ -92,7 +88,7 @@ class SignupPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MyApp(),
+                                builder: (context) => const MyApp(),
                               ),
                             );
                           },
@@ -109,6 +105,8 @@ class SignupPage extends StatelessWidget {
 }
 
 class SignupForm extends StatefulWidget {
+  const SignupForm({Key? key}) : super(key: key);
+
   @override
   State<SignupForm> createState() => _SignupFormState();
 }
@@ -119,7 +117,7 @@ class _SignupFormState extends State<SignupForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 30,
       ),
       child: Column(
@@ -135,7 +133,7 @@ class _SignupFormState extends State<SignupForm> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           DelayedAnimation(
             delay: 3000,
             child: TextField(
@@ -147,7 +145,7 @@ class _SignupFormState extends State<SignupForm> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           DelayedAnimation(
             delay: 3000,
             child: TextField(
@@ -159,7 +157,7 @@ class _SignupFormState extends State<SignupForm> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           DelayedAnimation(
             delay: 3000,
             child: TextField(
@@ -171,7 +169,7 @@ class _SignupFormState extends State<SignupForm> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
           DelayedAnimation(
             delay: 3500,
             child: TextField(
@@ -182,7 +180,7 @@ class _SignupFormState extends State<SignupForm> {
                 ),
                 labelText: 'Mot de passe*',
                 suffixIcon: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.visibility,
                     color: Colors.black,
                   ),

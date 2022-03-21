@@ -17,7 +17,7 @@ class _SearchScreenState extends State<SearchScreen> {
           centerTitle: true,
         ),
         body: const Center(
-          child: GetService(define_collection: "Services"),
+          child: GetService(defineStatus: "", defineCollection: "Services"),
         ));
   }
 }

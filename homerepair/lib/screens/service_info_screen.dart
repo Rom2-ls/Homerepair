@@ -3,7 +3,7 @@ import '../widget/add_demande.dart';
 
 class ServiceInfo extends StatelessWidget {
   const ServiceInfo({Key? key, required this.name}) : super(key: key);
-  final name;
+  final String name;
   final status = "pending";
 
   @override

@@ -8,6 +8,8 @@ class ProfilScreen extends StatefulWidget {
 }
 
 class _ProfilScreenState extends State<ProfilScreen> {
+  bool isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,15 @@ class _ProfilScreenState extends State<ProfilScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              MySwitch(),
+              Switch(
+                value: isSwitched,
+                onChanged: (value) {
+                  setState(() {
+                    isSwitched = !isSwitched;
+                    print(isSwitched);
+                  });
+                },
+              ),
               const Text("Nom utilisateur"),
               const Text("Nombre de demande en attente"),
               const Text("Nombre de demande accepté"),
@@ -27,30 +37,6 @@ class _ProfilScreenState extends State<ProfilScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class MySwitch extends StatefulWidget {
-  bool isSwitched = false;
-
-  MySwitch({Key? key}) : super(key: key);
-
-  @override
-  State<MySwitch> createState() => _MySwitchState();
-}
-
-class _MySwitchState extends State<MySwitch> {
-  @override
-  Widget build(BuildContext context) {
-    return Switch(
-      value: widget.isSwitched,
-      onChanged: (value) {
-        setState(() {
-          widget.isSwitched = !widget.isSwitched;
-          print(widget.isSwitched);
-        });
-      },
     );
   }
 }
