@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:homerepair/screens/home_screen.dart';
 import 'package:homerepair/welcome/welcome_page.dart';
 import 'firebase_options.dart';
 
@@ -18,6 +20,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: 'homerepair', home: WelcomePage());
+    Widget? pageToDisplay = const HomeScreen();
+    var user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      pageToDisplay = const HomeScreen();
+    } else {
+      pageToDisplay = const WelcomePage();
+    }
+
+    return MaterialApp(title: 'homerepair', home: pageToDisplay);
   }
 }
