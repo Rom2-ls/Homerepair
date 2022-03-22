@@ -43,7 +43,7 @@ class SignupPage extends StatelessWidget {
                     child: Text(
                       'Bienvenue chez Homerepair !',
                       style: TextStyle(
-                        color: d_red,
+                        color: dred,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),
@@ -143,12 +143,13 @@ class _SignupFormState extends State<SignupForm> {
         }
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
+          Fluttertoast.showToast(msg: 'The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
+          Fluttertoast.showToast(
+              msg: 'The account already exists for that email.');
         }
       } catch (e) {
-        print(e);
+        Fluttertoast.showToast(msg: "Oups, something went wrong");
       }
     }
 
@@ -277,7 +278,7 @@ class _SignupFormState extends State<SignupForm> {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
-            primary: d_red,
+            primary: dred,
             padding: const EdgeInsets.symmetric(
               horizontal: 125,
               vertical: 13,

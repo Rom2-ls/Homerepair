@@ -20,14 +20,14 @@ class WelcomePage extends StatelessWidget {
             children: [
               DelayedAnimation(
                 delay: 1500,
-                child: Container(
+                child: SizedBox(
                   height: 170,
                   child: Image.asset('images/homerepairlogo.png'),
                 ),
               ),
               DelayedAnimation(
                 delay: 2500,
-                child: Container(
+                child: SizedBox(
                   height: 400,
                   child: Image.asset('images/imageaccueil.png'),
                 ),
@@ -51,11 +51,11 @@ class WelcomePage extends StatelessWidget {
               ),
               DelayedAnimation(
                 delay: 4500,
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: d_red,
+                        primary: dred,
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.all(13)),
                     child: const Text("C'EST PARTI"),
@@ -63,7 +63,7 @@ class WelcomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SocialPage(),
+                          builder: (context) => const SocialPage(),
                         ),
                       );
                     },

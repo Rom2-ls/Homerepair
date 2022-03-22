@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                     child: Text(
                       'Connexion avec e-mail',
                       style: TextStyle(
-                        color: d_red,
+                        color: dred,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),
@@ -159,7 +159,7 @@ class _LoginFormState extends State<LoginForm> {
     final loginButton = ElevatedButton(
       style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: d_red,
+          primary: dred,
           padding: const EdgeInsets.symmetric(
             horizontal: 125,
             vertical: 13,
@@ -180,7 +180,7 @@ class _LoginFormState extends State<LoginForm> {
     final registerButton = ElevatedButton(
       style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: d_red,
+          primary: dred,
           padding: const EdgeInsets.symmetric(
             horizontal: 125,
             vertical: 13,

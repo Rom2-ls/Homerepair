@@ -30,14 +30,14 @@ class SocialPage extends StatelessWidget {
           children: [
             DelayedAnimation(
               delay: 1000,
-              child: Container(
+              child: SizedBox(
                 height: 300,
                 child: Image.asset('images/repairbike.png'),
               ),
             ),
             DelayedAnimation(
               delay: 2000,
-              child: Container(
+              child: SizedBox(
                 height: 200,
                 child: Container(
                   margin: const EdgeInsets.symmetric(
@@ -49,7 +49,7 @@ class SocialPage extends StatelessWidget {
                       Text(
                         "On s'occupe de tout",
                         style: TextStyle(
-                          color: d_red,
+                          color: dred,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -88,7 +88,7 @@ class SocialPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: d_red,
+                          primary: dred,
                           padding: const EdgeInsets.all(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
