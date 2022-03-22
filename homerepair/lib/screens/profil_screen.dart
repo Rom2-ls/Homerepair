@@ -2,8 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:homerepair/model/user_model.dart';
-import 'package:homerepair/screens/repair_screen.dart';
+import 'package:homerepair/screens/become_repair_screen.dart';
+import 'package:homerepair/screens/create_service_screen.dart';
 import 'package:homerepair/welcome/welcome_page.dart';
+import 'package:homerepair/widget/display_repair_demandes.dart';
+import 'package:homerepair/widget/display_repair_service.dart';
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({Key? key}) : super(key: key);
@@ -15,14 +18,6 @@ class ProfilScreen extends StatefulWidget {
 class _ProfilScreenState extends State<ProfilScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedUser = UserModel();
-
-  bool isSwitched = true;
-
-  void switched() {
-    setState(() {
-      isSwitched = !isSwitched;
-    });
-  }
 
   @override
   void initState() {
@@ -39,6 +34,14 @@ class _ProfilScreenState extends State<ProfilScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget settingList() {
+      if (loggedUser.repair == true) {
+        return const RepairOption();
+      } else {
+        return const ClientOption();
+      }
+    }
+
     final logoutButton = OutlinedButton(
       style: ElevatedButton.styleFrom(primary: Colors.red),
       onPressed: () async {
@@ -51,16 +54,6 @@ class _ProfilScreenState extends State<ProfilScreen> {
       child: const Text("logout"),
     );
 
-    final repairButton = OutlinedButton(
-      onPressed: () async {
-        Navigator.pushAndRemoveUntil(
-            (context),
-            MaterialPageRoute(builder: (context) => const RepairScreen()),
-            (route) => false);
-      },
-      child: const Text("Espace Réparateur"),
-    );
-
     showMenu() {
       showModalBottomSheet(
         context: context,
@@ -70,7 +63,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              repairButton,
+              settingList(),
               logoutButton,
             ],
           );
@@ -94,17 +87,64 @@ class _ProfilScreenState extends State<ProfilScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                  switched();
-                },
-              ),
               Text("${loggedUser.firstname}"),
+              Text("${loggedUser.repair}"),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class RepairOption extends StatelessWidget {
+  const RepairOption({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        OutlinedButton(
+            onPressed: () {
+              Navigator.push(
+                  (context),
+                  MaterialPageRoute(
+                      builder: (context) => const CreateServiceScreen()));
+            },
+            child: const Text("Créer un service")),
+        OutlinedButton(
+            onPressed: () {
+              Navigator.push(
+                  (context),
+                  MaterialPageRoute(
+                      builder: (context) => const RepairServiceScreen()));
+            },
+            child: const Text("Mes services en ligne")),
+        OutlinedButton(
+            onPressed: () {
+              Navigator.push(
+                  (context),
+                  MaterialPageRoute(
+                      builder: (context) => const RepairDemandesScreen()));
+            },
+            child: const Text("Mes demandes en attente")),
+      ],
+    );
+  }
+}
+
+class ClientOption extends StatelessWidget {
+  const ClientOption({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        onPressed: () {
+          Navigator.push(
+              (context),
+              MaterialPageRoute(
+                  builder: (context) => const BecomeRepairScreen()));
+        },
+        child: const Text("Devenir réparateur"));
   }
 }
