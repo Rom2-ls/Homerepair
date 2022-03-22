@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homerepair/widget/display_services.dart';
+import 'package:homerepair/widget/display_demandes.dart';
 
 class DemandeScreen extends StatefulWidget {
   const DemandeScreen({Key? key}) : super(key: key);
@@ -27,9 +27,9 @@ class _DemandeScreenState extends State<DemandeScreen> {
         ),
         body: const TabBarView(
           children: [
-            GetService(defineStatus: "pending", defineCollection: "demandes"),
-            GetService(defineStatus: "accepted", defineCollection: "demandes"),
-            GetService(defineStatus: "rejected", defineCollection: "demandes")
+            DisplayDemandes(status: "pending"),
+            DisplayDemandes(status: "accepted"),
+            DisplayDemandes(status: "rejected")
           ],
         ),
       ),

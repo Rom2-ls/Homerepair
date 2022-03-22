@@ -1,21 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import '../screens/service_info_screen.dart';
 
-class GetService extends StatefulWidget {
-  const GetService(
-      {Key? key, required this.defineStatus, required this.defineCollection})
-      : super(key: key);
-
-  final String defineStatus;
-  final String defineCollection;
+class DisplayServices extends StatefulWidget {
+  const DisplayServices({Key? key}) : super(key: key);
 
   @override
-  State<GetService> createState() => _GetServiceState();
+  State<DisplayServices> createState() => _DisplayServicesState();
 }
 
-class _GetServiceState extends State<GetService> {
+class _DisplayServicesState extends State<DisplayServices> {
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -33,35 +27,26 @@ class _GetServiceState extends State<GetService> {
                     borderRadius: BorderRadius.all(Radius.circular(5.0)))),
           ),
         ),
-        Expanded(
-          child: DisplayServices(
-            defineStatus: widget.defineStatus,
-            defineCollection: widget.defineCollection,
-          ),
+        const Expanded(
+          child: GenerateServiceList(),
         )
       ],
     );
   }
 }
 
-class DisplayServices extends StatefulWidget {
-  const DisplayServices(
-      {Key? key, required this.defineStatus, required this.defineCollection})
-      : super(key: key);
-
-  final String defineStatus;
-  final String defineCollection;
+class GenerateServiceList extends StatefulWidget {
+  const GenerateServiceList({Key? key}) : super(key: key);
 
   @override
-  _DisplayServicesState createState() => _DisplayServicesState();
+  _GenerateServiceListState createState() => _GenerateServiceListState();
 }
 
-class _DisplayServicesState extends State<DisplayServices> {
+class _GenerateServiceListState extends State<GenerateServiceList> {
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _servicesStream = FirebaseFirestore.instance
-        .collection(widget.defineCollection)
-        .snapshots();
+    final Stream<QuerySnapshot> _servicesStream =
+        FirebaseFirestore.instance.collection("services").snapshots();
 
     return StreamBuilder<QuerySnapshot>(
       stream: _servicesStream,
@@ -78,8 +63,10 @@ class _DisplayServicesState extends State<DisplayServices> {
                 document.data()! as Map<String, dynamic>;
             return Service(
               name: data['name'],
-              status: data['status'],
-              defineStatus: widget.defineStatus,
+              nameRepair: data['name_repair'],
+              idRepair: data['id_repair'],
+              price: data['price'],
+              desc: data['description'],
             );
           }).toList(),
         );
@@ -92,65 +79,66 @@ class Service extends StatelessWidget {
   const Service(
       {Key? key,
       required this.name,
-      required this.status,
-      required this.defineStatus})
+      required this.nameRepair,
+      required this.idRepair,
+      required this.price,
+      required this.desc})
       : super(key: key);
 
+  final String nameRepair;
+  final String idRepair;
   final String name;
-  final String status;
-  final String defineStatus;
+  final String desc;
+  final String price;
 
   @override
   Widget build(BuildContext context) {
-    final String finalStatus;
-
-    if (defineStatus == "") {
-      finalStatus = "";
-    } else {
-      finalStatus = defineStatus;
-    }
-
-    if (status == finalStatus) {
-      return Padding(
-        padding: const EdgeInsets.all(10),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ServiceInfo(
-                          name: name,
-                        )));
-          },
-          child: Card(
-            color: const Color(0xFF507EBA),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("Service : $name",
-                      style:
-                          const TextStyle(fontSize: 20, color: Colors.white)),
-                  const SizedBox(height: 20),
-                  Text("Status : $status",
-                      style:
-                          const TextStyle(fontSize: 20, color: Colors.white)),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Description du client : desc",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                  const SizedBox(height: 20),
-                ],
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ServiceInfo(
+                nameRepair: nameRepair,
+                idRepair: idRepair,
+                name: name,
+                price: price,
+                desc: desc,
               ),
+            ),
+          );
+        },
+        child: Card(
+          color: const Color(0xFF507EBA),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("Service proposé par $nameRepair",
+                    style: const TextStyle(fontSize: 20, color: Colors.white)),
+                const SizedBox(height: 20),
+                Text("Service : $name",
+                    style: const TextStyle(fontSize: 20, color: Colors.white)),
+                const SizedBox(height: 20),
+                Text(
+                  "Prix : $price",
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  "Description : $desc",
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
           ),
         ),
-      );
-    } else {
-      return Container();
-    }
+      ),
+    );
   }
 }
