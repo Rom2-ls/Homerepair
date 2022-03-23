@@ -30,6 +30,7 @@ class ServiceInfo extends StatelessWidget {
               AddDemande(
                 name: name,
                 idRepair: idRepair,
+                nameRepair: nameRepair,
                 price: price,
                 desc: desc,
                 status: status,
@@ -49,10 +50,12 @@ class AddDemande extends StatelessWidget {
       required this.name,
       required this.status,
       required this.price,
-      required this.desc})
+      required this.desc,
+      required this.nameRepair})
       : super(key: key);
 
   final String idRepair;
+  final String nameRepair;
   final String name;
   final String price;
   final String desc;
@@ -67,6 +70,7 @@ class AddDemande extends StatelessWidget {
       return demandes
           .add({
             'id_repair': idRepair,
+            'name_repair': nameRepair,
             'name': name,
             'price': price,
             'desc': desc,
