@@ -13,6 +13,39 @@ class DisplayDemandes extends StatefulWidget {
 class _DisplayDemandesState extends State<DisplayDemandes> {
   TextEditingController searchController = TextEditingController();
 
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  late String _filterValue;
+  @override
+  void initState() {
+    _filterValue = "";
+    super.initState();
+  }
+
+  filter(value) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: firestore
+            .collection("demandes")
+            .orderBy('name')
+            .startAt([value]).endAt([value + '\uf8ff']).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) return const Text("There is no expense");
+          return ListView(children: getFilteredServices(snapshot));
+        });
+  }
+
+  getFilteredServices(AsyncSnapshot<QuerySnapshot> snapshot) {
+    return snapshot.data!.docs
+        .map((doc) => Demande(
+              name: doc["name"],
+              price: doc['price'],
+              desc: doc['desc'],
+              nameRepair: doc['name_repair'],
+              status: widget.status,
+            ))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +54,11 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
           padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
           child: TextField(
             controller: searchController,
-            onChanged: (value) {},
+            onChanged: (value) {
+              setState(() {
+                _filterValue = value;
+              });
+            },
             decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
@@ -29,53 +66,9 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
           ),
         ),
         Expanded(
-          child: GenerateDemandeList(status: widget.status),
+          child: filter(_filterValue),
         )
       ],
-    );
-  }
-}
-
-class GenerateDemandeList extends StatefulWidget {
-  const GenerateDemandeList({Key? key, required this.status}) : super(key: key);
-
-  final String status;
-
-  @override
-  _GenerateDemandeListState createState() => _GenerateDemandeListState();
-}
-
-class _GenerateDemandeListState extends State<GenerateDemandeList> {
-  @override
-  Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _servicesStream = FirebaseFirestore.instance
-        .collection("demandes")
-        .where('status', isEqualTo: widget.status)
-        .snapshots();
-
-    return StreamBuilder<QuerySnapshot>(
-      stream: _servicesStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading");
-        }
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data =
-                document.data()! as Map<String, dynamic>;
-            return Demande(
-              name: data['name'],
-              nameRepair: data['name_repair'],
-              price: data['price'],
-              desc: data['desc'],
-              status: data['status'],
-            );
-          }).toList(),
-        );
-      },
     );
   }
 }

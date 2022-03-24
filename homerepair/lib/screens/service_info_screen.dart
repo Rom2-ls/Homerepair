@@ -3,20 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ServiceInfo extends StatelessWidget {
-  const ServiceInfo(
-      {Key? key,
-      required this.name,
-      required this.nameRepair,
-      required this.idRepair,
-      required this.price,
-      required this.desc})
-      : super(key: key);
+  const ServiceInfo({Key? key, required this.data}) : super(key: key);
 
-  final String nameRepair;
-  final String idRepair;
-  final String name;
-  final String price;
-  final String desc;
+  final Map data;
   final status = "pending";
 
   @override
@@ -28,11 +17,7 @@ class ServiceInfo extends StatelessWidget {
           child: Column(
             children: [
               AddDemande(
-                name: name,
-                idRepair: idRepair,
-                nameRepair: nameRepair,
-                price: price,
-                desc: desc,
+                data: data,
                 status: status,
               )
             ],
@@ -44,21 +29,10 @@ class ServiceInfo extends StatelessWidget {
 }
 
 class AddDemande extends StatelessWidget {
-  const AddDemande(
-      {Key? key,
-      required this.idRepair,
-      required this.name,
-      required this.status,
-      required this.price,
-      required this.desc,
-      required this.nameRepair})
+  const AddDemande({Key? key, required this.data, required this.status})
       : super(key: key);
 
-  final String idRepair;
-  final String nameRepair;
-  final String name;
-  final String price;
-  final String desc;
+  final Map data;
   final String status;
 
   @override
@@ -69,11 +43,11 @@ class AddDemande extends StatelessWidget {
     Future<void> addDemande() {
       return demandes
           .add({
-            'id_repair': idRepair,
-            'name_repair': nameRepair,
-            'name': name,
-            'price': price,
-            'desc': desc,
+            'id_repair': data['id_repair'],
+            'name_repair': data['name_repair'],
+            'name': data['name'],
+            'price': data['price'],
+            'desc': data['description'],
             'status': status,
           })
           .then((value) => Fluttertoast.showToast(msg: "Reservation envoyé"))

@@ -12,6 +12,39 @@ class DisplayServices extends StatefulWidget {
 class _DisplayServicesState extends State<DisplayServices> {
   TextEditingController searchController = TextEditingController();
 
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  late String _filterValue;
+  @override
+  void initState() {
+    _filterValue = "";
+    super.initState();
+  }
+
+  filter(value) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: firestore
+            .collection("services")
+            .orderBy('name')
+            .startAt([value]).endAt([value + '\uf8ff']).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) return const Text("There is no expense");
+          return ListView(children: getFilteredServices(snapshot));
+        });
+  }
+
+  getFilteredServices(AsyncSnapshot<QuerySnapshot> snapshot) {
+    return snapshot.data!.docs
+        .map((doc) => Service(
+              name: doc["name"],
+              price: doc['price'],
+              desc: doc['description'],
+              idRepair: doc['id_repair'],
+              nameRepair: doc['name_repair'],
+            ))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,57 +53,21 @@ class _DisplayServicesState extends State<DisplayServices> {
           padding: const EdgeInsets.fromLTRB(15, 20, 15, 10),
           child: TextField(
             controller: searchController,
-            onChanged: (value) {},
+            onChanged: (value) {
+              setState(() {
+                _filterValue = value;
+              });
+            },
             decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)))),
           ),
         ),
-        const Expanded(
-          child: GenerateServiceList(),
-        )
+        Expanded(
+          child: filter(_filterValue),
+        ),
       ],
-    );
-  }
-}
-
-class GenerateServiceList extends StatefulWidget {
-  const GenerateServiceList({Key? key}) : super(key: key);
-
-  @override
-  _GenerateServiceListState createState() => _GenerateServiceListState();
-}
-
-class _GenerateServiceListState extends State<GenerateServiceList> {
-  @override
-  Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _servicesStream =
-        FirebaseFirestore.instance.collection("services").snapshots();
-
-    return StreamBuilder<QuerySnapshot>(
-      stream: _servicesStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading");
-        }
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data =
-                document.data()! as Map<String, dynamic>;
-            return Service(
-              name: data['name'],
-              nameRepair: data['name_repair'],
-              idRepair: data['id_repair'],
-              price: data['price'],
-              desc: data['description'],
-            );
-          }).toList(),
-        );
-      },
     );
   }
 }
@@ -79,20 +76,28 @@ class Service extends StatelessWidget {
   const Service(
       {Key? key,
       required this.name,
-      required this.nameRepair,
-      required this.idRepair,
       required this.price,
-      required this.desc})
+      required this.desc,
+      required this.idRepair,
+      required this.nameRepair})
       : super(key: key);
 
-  final String nameRepair;
-  final String idRepair;
   final String name;
-  final String desc;
   final String price;
+  final String desc;
+  final String idRepair;
+  final String nameRepair;
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> data = {
+      'name': name,
+      'price': price,
+      'desc': desc,
+      'id_repair': idRepair,
+      'name_repair': nameRepair,
+    };
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: GestureDetector(
@@ -100,13 +105,7 @@ class Service extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ServiceInfo(
-                nameRepair: nameRepair,
-                idRepair: idRepair,
-                name: name,
-                price: price,
-                desc: desc,
-              ),
+              builder: (context) => ServiceInfo(data: data),
             ),
           );
         },
