@@ -43,7 +43,7 @@ class SignupPage extends StatelessWidget {
                     child: Text(
                       'Bienvenue chez Homerepair !',
                       style: TextStyle(
-                        color: dred,
+                        color: d_red,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),
@@ -278,7 +278,7 @@ class _SignupFormState extends State<SignupForm> {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
-            primary: dred,
+            primary: d_red,
             padding: const EdgeInsets.symmetric(
               horizontal: 125,
               vertical: 13,

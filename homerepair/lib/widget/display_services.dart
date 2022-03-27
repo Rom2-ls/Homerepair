@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:homerepair/main.dart';
 import '../screens/service_info_screen.dart';
 
 class DisplayServices extends StatefulWidget {
@@ -61,7 +62,7 @@ class _DisplayServicesState extends State<DisplayServices> {
             decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)))),
+                    borderRadius: BorderRadius.all(Radius.circular(50)))),
           ),
         ),
         Expanded(
@@ -110,7 +111,10 @@ class Service extends StatelessWidget {
           );
         },
         child: Card(
-          color: const Color(0xFF507EBA),
+          elevation: 10,
+          color: d_red,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
             child: Column(
