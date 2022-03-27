@@ -112,7 +112,7 @@ class Service extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
-        color: const Color(0xFF507EBA),
+        color: const Color(0xFFFF595E),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
           child: Column(
