@@ -27,6 +27,7 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
         stream: firestore
             .collection("demandes")
             .orderBy('name')
+            .where("status", isEqualTo: widget.status)
             .startAt([value]).endAt([value + '\uf8ff']).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) return const Text("There is no expense");
@@ -117,9 +118,9 @@ class Demande extends StatelessWidget {
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               const SizedBox(height: 20),
-              const Text(
-                "Je dois trouver un moyen d'ajouter une date de reservation",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+              Text(
+                status,
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ],
           ),
