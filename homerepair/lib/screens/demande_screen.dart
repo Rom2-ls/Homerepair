@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homerepair/main.dart';
 import 'package:homerepair/widget/display_demandes.dart';
 
 class DemandeScreen extends StatefulWidget {
@@ -9,19 +10,30 @@ class DemandeScreen extends StatefulWidget {
 }
 
 class _DemandeScreenState extends State<DemandeScreen> {
-  final upperTab = const TabBar(tabs: <Tab>[
-    Tab(child: Text("En attente")),
-    Tab(child: Text("Acceptée")),
-    Tab(child: Text("Refusée")),
-  ]);
+  final upperTab = const TabBar(
+    tabs: <Tab>[
+      Tab(child: Text("En attente")),
+      Tab(child: Text("Acceptée")),
+      Tab(child: Text("Refusée")),
+    ],
+    labelColor: d_blue,
+    unselectedLabelColor: Colors.grey,
+    indicatorColor: d_blue,
+  );
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: Color(0xFFEDECF2),
         appBar: AppBar(
-          title: const Text("Demandes"),
+          backgroundColor: Colors.white.withOpacity(0),
+          elevation: 0,
+          title: Image.asset(
+            'images/homerepairlogo.png',
+            height: 120,
+          ),
           centerTitle: true,
           bottom: upperTab,
         ),

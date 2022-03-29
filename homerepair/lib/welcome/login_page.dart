@@ -38,7 +38,7 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   DelayedAnimation(
-                    delay: 1500,
+                    delay: 500,
                     child: Text(
                       'Connexion avec e-mail',
                       style: TextStyle(
@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   SizedBox(height: 22),
                   DelayedAnimation(
-                    delay: 1500,
+                    delay: 500,
                     child: Text(
                       'Il vous est recommandé de vous connecter avec un e-mail afin de mieux protéger vos informations',
                       style: TextStyle(
@@ -185,10 +185,8 @@ class _LoginFormState extends State<LoginForm> {
       },
     );
 
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 30,
-      ),
+    return DelayedAnimation(
+      delay: 500,
       child: Form(
         key: formKey,
         child: Column(

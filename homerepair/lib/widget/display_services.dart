@@ -111,7 +111,7 @@ class Service extends StatelessWidget {
           );
         },
         child: Card(
-          elevation: 10,
+          elevation: 7,
           color: d_red,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15))),

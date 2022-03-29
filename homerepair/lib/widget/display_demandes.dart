@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:homerepair/main.dart';
 import 'package:homerepair/model/user_model.dart';
 
 class DisplayDemandes extends StatefulWidget {
@@ -77,7 +78,8 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
             decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)))),
+                    borderSide: BorderSide(color: d_red),
+                    borderRadius: BorderRadius.all(Radius.circular(30)))),
           ),
         ),
         Expanded(
@@ -107,6 +109,7 @@ class Demande extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        elevation: 7,
         color: const Color(0xFFFF595E),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
