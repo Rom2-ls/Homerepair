@@ -109,6 +109,10 @@ class _LoginFormState extends State<LoginForm> {
 
     final emailField = TextFormField(
       decoration: InputDecoration(
+        icon: Icon(
+          Icons.email,
+          color: Colors.grey,
+        ),
         labelText: 'E-mail*',
         labelStyle: TextStyle(
           color: Colors.grey[400],
@@ -125,6 +129,10 @@ class _LoginFormState extends State<LoginForm> {
     final passwordField = TextFormField(
       obscureText: _obscureText,
       decoration: InputDecoration(
+        icon: Icon(
+          Icons.lock,
+          color: Colors.grey,
+        ),
         labelStyle: TextStyle(
           color: Colors.grey[400],
         ),
@@ -161,7 +169,7 @@ class _LoginFormState extends State<LoginForm> {
           shape: const StadiumBorder(),
           primary: d_red,
           padding: const EdgeInsets.symmetric(
-            horizontal: 125,
+            horizontal: 69,
             vertical: 13,
           )),
       child: const Text(
@@ -177,32 +185,6 @@ class _LoginFormState extends State<LoginForm> {
       },
     );
 
-    final registerButton = ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          shape: const StadiumBorder(),
-          primary: d_red,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 125,
-            vertical: 13,
-          )),
-      child: const Text(
-        "S'INSCRIRE",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const SignupPage(),
-          ),
-        );
-      },
-    );
-
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 30,
@@ -214,10 +196,31 @@ class _LoginFormState extends State<LoginForm> {
             emailField,
             const SizedBox(height: 30),
             passwordField,
-            const SizedBox(height: 30),
+            const SizedBox(height: 70),
             loginButton,
-            const SizedBox(height: 30),
-            registerButton
+            SizedBox(height: 30),
+            Text(
+              "Vous n'avez pas encore de compte ?",
+              style: TextStyle(color: Colors.grey),
+            ),
+            InkWell(
+              child: Text(
+                "S'inscrire",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 61, 128, 188),
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SignupPage(),
+                  ),
+                );
+              },
+            )
           ],
         ),
       ),

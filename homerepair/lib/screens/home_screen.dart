@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homerepair/main.dart';
 import 'package:homerepair/screens/demande_screen.dart';
 import 'package:homerepair/screens/profil_screen.dart';
 import 'package:homerepair/screens/search_screen.dart';
@@ -20,6 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedIconTheme: IconThemeData(
+          color: d_red,
+          size: 30,
+        ),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
@@ -30,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Demandes',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_outline),
             label: 'Profil',
           ),
         ],
