@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:homerepair/model/user_model.dart';
 
 class DisplayDemandes extends StatefulWidget {
   const DisplayDemandes({Key? key, required this.status}) : super(key: key);
@@ -14,23 +16,36 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
   TextEditingController searchController = TextEditingController();
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedUser = UserModel();
 
   late String _filterValue;
   @override
   void initState() {
-    _filterValue = "";
     super.initState();
+    _filterValue = "";
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
   }
 
   filter(value) {
     return StreamBuilder<QuerySnapshot>(
         stream: firestore
             .collection("demandes")
-            .orderBy('name')
             .where("status", isEqualTo: widget.status)
+            .where("id_client", isEqualTo: user!.uid)
+            .orderBy('name')
             .startAt([value]).endAt([value + '\uf8ff']).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) return const Text("There is no expense");
+          if (!snapshot.hasData) {
+            return const Text("Vous n'avez pas fait de demandes");
+          }
           return ListView(children: getFilteredServices(snapshot));
         });
   }
@@ -40,7 +55,6 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
         .map((doc) => Demande(
               name: doc["name"],
               price: doc['price'],
-              desc: doc['desc'],
               nameRepair: doc['name_repair'],
               status: widget.status,
             ))
@@ -80,15 +94,13 @@ class Demande extends StatelessWidget {
       required this.name,
       required this.nameRepair,
       required this.price,
-      required this.status,
-      required this.desc})
+      required this.status})
       : super(key: key);
 
   final String nameRepair;
   final String name;
   final String price;
   final String status;
-  final String desc;
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +122,6 @@ class Demande extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 "Prix : $price",
-                style: const TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                "Description : $desc",
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               const SizedBox(height: 20),

@@ -89,7 +89,6 @@ class _GenerateDemandeListState extends State<GenerateDemandeList> {
             return Service(
               name: data['name'],
               price: data['price'],
-              desc: data['desc'],
             );
           }).toList(),
         );
@@ -99,12 +98,10 @@ class _GenerateDemandeListState extends State<GenerateDemandeList> {
 }
 
 class Service extends StatelessWidget {
-  const Service(
-      {Key? key, required this.name, required this.price, required this.desc})
+  const Service({Key? key, required this.name, required this.price})
       : super(key: key);
 
   final String name;
-  final String desc;
   final String price;
 
   @override
@@ -124,11 +121,6 @@ class Service extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 "Prix : $price",
-                style: const TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                "Description : $desc",
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               const SizedBox(height: 20),

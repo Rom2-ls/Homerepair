@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:homerepair/model/user_model.dart';
 
 class ServiceInfo extends StatelessWidget {
   const ServiceInfo({Key? key, required this.data}) : super(key: key);
@@ -28,12 +30,33 @@ class ServiceInfo extends StatelessWidget {
   }
 }
 
-class AddDemande extends StatelessWidget {
+class AddDemande extends StatefulWidget {
   const AddDemande({Key? key, required this.data, required this.status})
       : super(key: key);
 
   final Map data;
   final String status;
+
+  @override
+  State<AddDemande> createState() => _AddDemandeState();
+}
+
+class _AddDemandeState extends State<AddDemande> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      loggedUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +66,13 @@ class AddDemande extends StatelessWidget {
     Future<void> addDemande() {
       return demandes
           .add({
-            'id_repair': data['id_repair'],
-            'name_repair': data['name_repair'],
-            'name': data['name'],
-            'price': data['price'],
-            'desc': data['description'],
-            'status': status,
+            'id_client': user!.uid,
+            'id_repair': widget.data['id_repair'],
+            'name_repair': widget.data['name_repair'],
+            'name': widget.data['name'],
+            'price': widget.data['price'],
+            'desc': widget.data['description'],
+            'status': widget.status,
           })
           .then((value) => Fluttertoast.showToast(msg: "Reservation envoyé"))
           .catchError((error) =>
