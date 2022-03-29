@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:homerepair/main.dart';
 import 'package:homerepair/model/user_model.dart';
 import 'package:homerepair/screens/home_screen.dart';
+import 'package:homerepair/welcome/login_page.dart';
 import 'package:homerepair/widget/delayed_animation.dart';
 
 class SignupPage extends StatelessWidget {
@@ -18,7 +19,7 @@ class SignupPage extends StatelessWidget {
         backgroundColor: Colors.white.withOpacity(0),
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.close,
             color: Colors.black,
             size: 30,
           ),
@@ -32,7 +33,7 @@ class SignupPage extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(
-                vertical: 40,
+                vertical: 10,
                 horizontal: 30,
               ),
               child: Column(
@@ -46,18 +47,6 @@ class SignupPage extends StatelessWidget {
                         color: d_red,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 22),
-                  const DelayedAnimation(
-                    delay: 500,
-                    child: Text(
-                      'Il vous est recommandé de vous connecter avec un e-mail afin de mieux protéger vos informations',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -157,6 +146,10 @@ class _SignupFormState extends State<SignupForm> {
 
     final firstnameField = TextFormField(
       decoration: InputDecoration(
+        icon: Icon(
+          Icons.person,
+          color: Colors.grey,
+        ),
         labelText: 'Prénom*',
         labelStyle: TextStyle(
           color: Colors.grey[400],
@@ -178,6 +171,10 @@ class _SignupFormState extends State<SignupForm> {
 
     final lastnameField = TextFormField(
       decoration: InputDecoration(
+        icon: Icon(
+          Icons.person,
+          color: Colors.grey,
+        ),
         labelText: 'Nom*',
         labelStyle: TextStyle(
           color: Colors.grey[400],
@@ -199,6 +196,10 @@ class _SignupFormState extends State<SignupForm> {
 
     final phoneField = TextFormField(
       decoration: InputDecoration(
+        icon: Icon(
+          Icons.phone,
+          color: Colors.grey,
+        ),
         labelText: 'Téléphone*',
         labelStyle: TextStyle(
           color: Colors.grey[400],
@@ -224,6 +225,11 @@ class _SignupFormState extends State<SignupForm> {
 
     final emailField = TextFormField(
       decoration: InputDecoration(
+        icon: Icon(
+          Icons.mail,
+          color: Colors.grey,
+          size: 20,
+        ),
         labelText: 'E-mail*',
         labelStyle: TextStyle(
           color: Colors.grey[400],
@@ -240,6 +246,11 @@ class _SignupFormState extends State<SignupForm> {
     final passwordField = TextFormField(
       obscureText: _obscureText,
       decoration: InputDecoration(
+        icon: Icon(
+          Icons.lock,
+          color: Colors.grey,
+          size: 20,
+        ),
         labelStyle: TextStyle(
           color: Colors.grey[400],
         ),
@@ -271,31 +282,28 @@ class _SignupFormState extends State<SignupForm> {
       },
     );
 
-    final inscriptionButton = DelayedAnimation(
-      delay: 2500,
-      child: SizedBox(
-        width: double.infinity,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
-            primary: d_red,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 125,
-              vertical: 13,
-            ),
+    final inscriptionButton = SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shape: const StadiumBorder(),
+          primary: d_red,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 8,
+            vertical: 13,
           ),
-          child: const Text(
-            "S'INSCRIRE",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          onPressed: () {
-            register(emailController.text, passwordController.text);
-          },
         ),
+        child: const Text(
+          "S'INSCRIRE",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        onPressed: () {
+          register(emailController.text, passwordController.text);
+        },
       ),
     );
 
@@ -317,7 +325,61 @@ class _SignupFormState extends State<SignupForm> {
             const SizedBox(height: 30),
             passwordField,
             const SizedBox(height: 30),
+            Card(
+              margin: EdgeInsets.all(5),
+              color: Color.fromARGB(255, 186, 222, 252),
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    color: Color.fromARGB(255, 186, 222, 252), width: 2),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const ListTile(
+                    leading: Icon(Icons.info_outline,
+                        color: Color.fromARGB(255, 40, 116, 167), size: 20),
+                    title: Text(
+                      "Le mot de passe doit avoir au mnimum 6 carctères",
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Color.fromARGB(255, 40, 116, 167),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
             inscriptionButton,
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Vous avez déjà un compte ?",
+              style: TextStyle(color: Colors.grey),
+            ),
+            InkWell(
+              child: Text(
+                "Se connecter",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 61, 128, 188),
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

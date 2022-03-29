@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homerepair/main.dart';
+import 'package:homerepair/welcome/signup_page.dart';
 import 'package:homerepair/widget/delayed_animation.dart';
 import 'package:homerepair/welcome/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -89,44 +90,52 @@ class SocialPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
                           primary: d_red,
-                          padding: const EdgeInsets.all(20)),
+                          padding: const EdgeInsets.all(13)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Icon(Icons.mail_outline_outlined),
                           SizedBox(width: 10),
                           Text(
-                            'CONNEXION PAR EMAIL',
+                            'CONNEXION',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
+                          Icon(Icons.arrow_right_rounded),
                         ],
                       ),
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
-                        signInWithGoogle();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignupPage(),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: Colors.white,
-                          padding: const EdgeInsets.all(20)),
+                          primary: Color.fromARGB(255, 63, 125, 187),
+                          padding: const EdgeInsets.all(13)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('images/googlelogo.png', height: 20),
                           const SizedBox(width: 10),
                           const Text(
-                            'CONNEXION AVEC GOOGLE',
+                            "INSCRIPTION",
                             style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
+                              color: Colors.white,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                             ),
+                          ),
+                          Icon(
+                            Icons.arrow_right_rounded,
+                            color: Colors.white,
                           ),
                         ],
                       ),
