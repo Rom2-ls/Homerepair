@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:homerepair/main.dart';
 import '../widget/display_services.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -13,7 +12,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFEDECF2),
+        backgroundColor: const Color(0xFFEDECF2),
         appBar: AppBar(
           backgroundColor: Colors.white.withOpacity(0),
           elevation: 0,

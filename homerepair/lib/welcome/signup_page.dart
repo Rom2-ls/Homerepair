@@ -44,7 +44,7 @@ class SignupPage extends StatelessWidget {
                     child: Text(
                       'Bienvenue chez Homerepair !',
                       style: TextStyle(
-                        color: d_red,
+                        color: dRed,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),
@@ -146,7 +146,7 @@ class _SignupFormState extends State<SignupForm> {
 
     final firstnameField = TextFormField(
       decoration: InputDecoration(
-        icon: Icon(
+        icon: const Icon(
           Icons.person,
           color: Colors.grey,
         ),
@@ -171,7 +171,7 @@ class _SignupFormState extends State<SignupForm> {
 
     final lastnameField = TextFormField(
       decoration: InputDecoration(
-        icon: Icon(
+        icon: const Icon(
           Icons.person,
           color: Colors.grey,
         ),
@@ -196,7 +196,7 @@ class _SignupFormState extends State<SignupForm> {
 
     final phoneField = TextFormField(
       decoration: InputDecoration(
-        icon: Icon(
+        icon: const Icon(
           Icons.phone,
           color: Colors.grey,
         ),
@@ -225,7 +225,7 @@ class _SignupFormState extends State<SignupForm> {
 
     final emailField = TextFormField(
       decoration: InputDecoration(
-        icon: Icon(
+        icon: const Icon(
           Icons.mail,
           color: Colors.grey,
           size: 20,
@@ -246,7 +246,7 @@ class _SignupFormState extends State<SignupForm> {
     final passwordField = TextFormField(
       obscureText: _obscureText,
       decoration: InputDecoration(
-        icon: Icon(
+        icon: const Icon(
           Icons.lock,
           color: Colors.grey,
           size: 20,
@@ -287,7 +287,7 @@ class _SignupFormState extends State<SignupForm> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: d_red,
+          primary: dRed,
           padding: const EdgeInsets.symmetric(
             horizontal: 8,
             vertical: 13,
@@ -326,10 +326,10 @@ class _SignupFormState extends State<SignupForm> {
             passwordField,
             const SizedBox(height: 30),
             Card(
-              margin: EdgeInsets.all(5),
-              color: Color.fromARGB(255, 186, 222, 252),
+              margin: const EdgeInsets.all(5),
+              color: const Color.fromARGB(255, 186, 222, 252),
               elevation: 0,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 side: BorderSide(
                     color: Color.fromARGB(255, 186, 222, 252), width: 2),
                 borderRadius: BorderRadius.all(
@@ -338,8 +338,8 @@ class _SignupFormState extends State<SignupForm> {
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const ListTile(
+                children: const <Widget>[
+                  ListTile(
                     leading: Icon(Icons.info_outline,
                         color: Color.fromARGB(255, 40, 116, 167), size: 20),
                     title: Text(
@@ -355,15 +355,13 @@ class _SignupFormState extends State<SignupForm> {
             ),
             const SizedBox(height: 30),
             inscriptionButton,
-            SizedBox(
-              height: 10,
-            ),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               "Vous avez déjà un compte ?",
               style: TextStyle(color: Colors.grey),
             ),
             InkWell(
-              child: Text(
+              child: const Text(
                 "Se connecter",
                 style: TextStyle(
                   color: Color.fromARGB(255, 61, 128, 188),

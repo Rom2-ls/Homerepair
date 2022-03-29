@@ -78,7 +78,7 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
             decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: d_red),
+                    borderSide: BorderSide(color: dRed),
                     borderRadius: BorderRadius.all(Radius.circular(30)))),
           ),
         ),
@@ -109,6 +109,8 @@ class Demande extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15))),
         elevation: 7,
         color: const Color(0xFFFF595E),
         child: Padding(

@@ -112,8 +112,8 @@ class Service extends StatelessWidget {
         },
         child: Card(
           elevation: 7,
-          color: d_red,
-          shape: RoundedRectangleBorder(
+          color: dRed,
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(15))),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),

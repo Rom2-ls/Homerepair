@@ -16,9 +16,9 @@ class _DemandeScreenState extends State<DemandeScreen> {
       Tab(child: Text("Acceptée")),
       Tab(child: Text("Refusée")),
     ],
-    labelColor: d_blue,
+    labelColor: dBlue,
     unselectedLabelColor: Colors.grey,
-    indicatorColor: d_blue,
+    indicatorColor: dBlue,
   );
 
   @override
@@ -26,7 +26,7 @@ class _DemandeScreenState extends State<DemandeScreen> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: Color(0xFFEDECF2),
+        backgroundColor: const Color(0xFFEDECF2),
         appBar: AppBar(
           backgroundColor: Colors.white.withOpacity(0),
           elevation: 0,

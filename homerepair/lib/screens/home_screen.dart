@@ -21,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
         child: _pages.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFFEDECF2),
+        backgroundColor: const Color(0xFFEDECF2),
         elevation: 0,
-        selectedIconTheme: IconThemeData(
-          color: d_red,
+        selectedIconTheme: const IconThemeData(
+          color: dRed,
           size: 30,
         ),
         items: const <BottomNavigationBarItem>[

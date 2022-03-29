@@ -55,7 +55,7 @@ class WelcomePage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: d_red,
+                        primary: dRed,
                         shape: const StadiumBorder(),
                         padding: const EdgeInsets.all(13)),
                     child: const Text("C'EST PARTI"),

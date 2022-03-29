@@ -50,7 +50,7 @@ class SocialPage extends StatelessWidget {
                       Text(
                         "On s'occupe de tout",
                         style: TextStyle(
-                          color: d_red,
+                          color: dRed,
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -89,7 +89,7 @@ class SocialPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: d_red,
+                          primary: dRed,
                           padding: const EdgeInsets.all(13)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -119,13 +119,13 @@ class SocialPage extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
-                          primary: Color.fromARGB(255, 63, 125, 187),
+                          primary: const Color.fromARGB(255, 63, 125, 187),
                           padding: const EdgeInsets.all(13)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(width: 10),
-                          const Text(
+                        children: const [
+                          SizedBox(width: 10),
+                          Text(
                             "INSCRIPTION",
                             style: TextStyle(
                               color: Colors.white,

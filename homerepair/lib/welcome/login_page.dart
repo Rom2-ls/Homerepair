@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                     child: Text(
                       'Connexion avec e-mail',
                       style: TextStyle(
-                        color: d_red,
+                        color: dRed,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),
@@ -112,7 +112,7 @@ class _LoginFormState extends State<LoginForm> {
 
     final emailField = TextFormField(
       decoration: InputDecoration(
-        icon: Icon(
+        icon: const Icon(
           Icons.email,
           color: Colors.grey,
         ),
@@ -132,7 +132,7 @@ class _LoginFormState extends State<LoginForm> {
     final passwordField = TextFormField(
       obscureText: _obscureText,
       decoration: InputDecoration(
-        icon: Icon(
+        icon: const Icon(
           Icons.lock,
           color: Colors.grey,
         ),
@@ -170,7 +170,7 @@ class _LoginFormState extends State<LoginForm> {
     final loginButton = ElevatedButton(
       style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
-          primary: d_red,
+          primary: dRed,
           padding: const EdgeInsets.symmetric(
             horizontal: 69,
             vertical: 13,
@@ -199,13 +199,13 @@ class _LoginFormState extends State<LoginForm> {
             passwordField,
             const SizedBox(height: 70),
             loginButton,
-            SizedBox(height: 30),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               "Vous n'avez pas encore de compte ?",
               style: TextStyle(color: Colors.grey),
             ),
             InkWell(
-              child: Text(
+              child: const Text(
                 "S'inscrire",
                 style: TextStyle(
                   color: Color.fromARGB(255, 61, 128, 188),
