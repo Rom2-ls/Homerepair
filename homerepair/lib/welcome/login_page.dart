@@ -96,8 +96,11 @@ class _LoginFormState extends State<LoginForm> {
             .signInWithEmailAndPassword(email: email, password: pwd)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successfull"),
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const HomeScreen()))
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    (Route<dynamic> route) => false,
+                  )
                 })
             .catchError((e) {
           Fluttertoast.showToast(msg: e!.message);
