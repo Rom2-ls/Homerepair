@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RepairDemandesScreen extends StatefulWidget {
   const RepairDemandesScreen({Key? key}) : super(key: key);
@@ -83,13 +84,13 @@ class _GenerateDemandeListState extends State<GenerateDemandeList> {
           return const Text("Loading");
         }
         return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data =
-                document.data()! as Map<String, dynamic>;
-            return Service(
-              name: data['name'],
-              price: data['price'],
-            );
+          children: snapshot.data!.docs.map((DocumentSnapshot doc) {
+            Map<String, dynamic> data = doc.data()! as Map<String, dynamic>;
+            return MyDemandes(
+                demId: doc.id,
+                name: data['name'],
+                price: data['price'],
+                status: data['status']);
           }).toList(),
         );
       },
@@ -97,36 +98,103 @@ class _GenerateDemandeListState extends State<GenerateDemandeList> {
   }
 }
 
-class Service extends StatelessWidget {
-  const Service({Key? key, required this.name, required this.price})
+class MyDemandes extends StatelessWidget {
+  MyDemandes(
+      {Key? key,
+      required this.name,
+      required this.price,
+      required this.demId,
+      required this.status})
       : super(key: key);
 
+  final String demId;
   final String name;
   final String price;
+  final String status;
+
+  CollectionReference demandes =
+      FirebaseFirestore.instance.collection('demandes');
+
+  Future<void> updateDemande(demId, status) {
+    return demandes
+        .doc(demId)
+        .update({'status': status})
+        .then((value) => Fluttertoast.showToast(msg: "Demande acceptée"))
+        .catchError((error) =>
+            Fluttertoast.showToast(msg: "Une erreur est survenue: $error"));
+  }
 
   @override
   Widget build(BuildContext context) {
+    Color? cardColor;
+
+    switch (status) {
+      case 'pending':
+        cardColor = const Color(0xFFFF595E);
+        break;
+      case 'accepted':
+        cardColor = const Color.fromARGB(255, 0, 106, 255);
+        break;
+      case 'rejected':
+        cardColor = const Color.fromARGB(255, 255, 0, 0);
+        break;
+      default:
+    }
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Card(
         elevation: 7,
-        color: const Color(0xFFFF595E),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text("Service : $name",
-                  style: const TextStyle(fontSize: 20, color: Colors.white)),
-              const SizedBox(height: 20),
-              Text(
-                "Prix : $price",
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+        color: cardColor,
+        child: Column(
+          children: [
+            const SizedBox(
+              width: double.infinity,
+              height: 20,
+              child: DecoratedBox(decoration: BoxDecoration(color: Colors.red)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 15, 15, 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("Service : $name",
+                      style:
+                          const TextStyle(fontSize: 20, color: Colors.white)),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Prix : $price",
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      OutlinedButton(
+                          onPressed: () {
+                            updateDemande(demId, 'accepted');
+                          },
+                          child: const Text('Accepter')),
+                      OutlinedButton(
+                        onPressed: () {
+                          updateDemande(demId, 'rejected');
+                        },
+                        child: const Text("Refuser"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {
+                          updateDemande(demId, 'pending');
+                        },
+                        child: const Text("en attente"),
+                      )
+                    ],
+                  )
+                ],
               ),
-              const SizedBox(height: 20),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

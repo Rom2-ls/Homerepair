@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:homerepair/main.dart';
 import 'package:homerepair/model/user_model.dart';
 
@@ -54,6 +55,7 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
   getFilteredServices(AsyncSnapshot<QuerySnapshot> snapshot) {
     return snapshot.data!.docs
         .map((doc) => Demande(
+              demId: doc.id,
               name: doc["name"],
               price: doc['price'],
               nameRepair: doc['name_repair'],
@@ -91,18 +93,32 @@ class _DisplayDemandesState extends State<DisplayDemandes> {
 }
 
 class Demande extends StatelessWidget {
-  const Demande(
+  Demande(
       {Key? key,
+      required this.demId,
       required this.name,
       required this.nameRepair,
       required this.price,
       required this.status})
       : super(key: key);
 
-  final String nameRepair;
+  final String demId;
   final String name;
+  final String nameRepair;
   final String price;
   final String status;
+
+  CollectionReference demandes =
+      FirebaseFirestore.instance.collection('demandes');
+
+  Future<void> deleteDemande(demId) {
+    return demandes
+        .doc(demId)
+        .delete()
+        .then((value) => Fluttertoast.showToast(msg: "Demande supprimée"))
+        .catchError((error) =>
+            Fluttertoast.showToast(msg: "Une erreur est survenue : $error"));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,10 +146,11 @@ class Demande extends StatelessWidget {
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               const SizedBox(height: 20),
-              Text(
-                status,
-                style: const TextStyle(fontSize: 20, color: Colors.white),
-              ),
+              OutlinedButton(
+                  onPressed: () {
+                    deleteDemande(demId);
+                  },
+                  child: const Text('Supprimer la demande'))
             ],
           ),
         ),
