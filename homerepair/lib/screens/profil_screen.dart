@@ -71,6 +71,37 @@ class _ProfilScreenState extends State<ProfilScreen> {
       }
     }
 
+    final logoutButton = SizedBox(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white,
+          elevation: 0,
+        ),
+        onPressed: () async {
+          await FirebaseAuth.instance.signOut();
+          Navigator.pushAndRemoveUntil(
+              (context),
+              MaterialPageRoute(builder: (context) => const WelcomePage()),
+              (route) => false);
+        },
+        child: Wrap(
+          children: <Widget>[
+            Icon(
+              Icons.logout_rounded,
+              color: Color.fromARGB(255, 134, 0, 0),
+              size: 22,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text("Se déconnecter",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 134, 0, 0), fontSize: 15)),
+          ],
+        ),
+      ),
+    );
+
     if (loggedUser.email != null) {
       email = loggedUser.email!;
     }
@@ -208,8 +239,9 @@ class _ProfilScreenState extends State<ProfilScreen> {
 
     final updateProfil = ElevatedButton(
         style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
           elevation: 0,
-          primary: colorButton,
+          primary: dRed,
         ),
         onPressed: () {
           if (firstnameController.text.isNotEmpty ||
@@ -223,20 +255,8 @@ class _ProfilScreenState extends State<ProfilScreen> {
         },
         child: Text(
           "Modifier",
-          style: styleButton,
+          style: TextStyle(),
         ));
-
-    final logoutButton = OutlinedButton(
-      style: ElevatedButton.styleFrom(primary: Colors.red),
-      onPressed: () async {
-        await FirebaseAuth.instance.signOut();
-        Navigator.pushAndRemoveUntil(
-            (context),
-            MaterialPageRoute(builder: (context) => const WelcomePage()),
-            (route) => false);
-      },
-      child: const Text("logout"),
-    );
 
     showMenu() {
       showModalBottomSheet(
@@ -282,18 +302,52 @@ class _ProfilScreenState extends State<ProfilScreen> {
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                firstnameField,
-                lastnameField,
-                numberField,
-                emailField,
-                repairField,
-                updateProfil,
-              ],
-            ),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 30,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Mes informations',
+                      style: TextStyle(
+                        color: dRed,
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 22),
+                    Text(
+                      'Coordonnées',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    firstnameField,
+                    SizedBox(height: 30),
+                    lastnameField,
+                    SizedBox(height: 30),
+                    numberField,
+                    SizedBox(height: 30),
+                    emailField,
+                    SizedBox(height: 30),
+                    repairField,
+                    SizedBox(height: 50),
+                    SizedBox(
+                      width: double.infinity,
+                      child: updateProfil,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
