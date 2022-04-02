@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:homerepair/main.dart';
 import 'package:homerepair/model/user_model.dart';
 import 'package:homerepair/screens/become_repair_screen.dart';
 import 'package:homerepair/screens/create_service_screen.dart';
@@ -239,11 +240,13 @@ class _ProfilScreenState extends State<ProfilScreen> {
 
     showMenu() {
       showModalBottomSheet(
+        backgroundColor: Colors.white,
         context: context,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
         builder: (BuildContext context) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               settingList(),
@@ -255,14 +258,25 @@ class _ProfilScreenState extends State<ProfilScreen> {
     }
 
     return Scaffold(
+      backgroundColor: const Color(0xFFEDECF2),
       appBar: AppBar(
-        title: const Text("Profil"),
+        backgroundColor: Colors.white.withOpacity(0),
+        elevation: 0,
+        title: Image.asset(
+          'images/homerepairlogo.png',
+          height: 120,
+        ),
         centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: IconButton(
-                onPressed: () => showMenu(), icon: const Icon(Icons.settings)),
+                onPressed: () => showMenu(),
+                icon: const Icon(
+                  Icons.settings,
+                  color: dBlue,
+                  size: 17,
+                )),
           )
         ],
       ),
@@ -292,33 +306,92 @@ class RepairOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        OutlinedButton(
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ElevatedButton(
             onPressed: () {
               Navigator.push(
                   (context),
                   MaterialPageRoute(
                       builder: (context) => const CreateServiceScreen()));
             },
-            child: const Text("Créer un service")),
-        OutlinedButton(
+            style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                shape: StadiumBorder(),
+                padding: EdgeInsets.all(10),
+                elevation: 0),
+            child: Wrap(
+              children: <Widget>[
+                Icon(
+                  Icons.add_circle_outline_rounded,
+                  color: Colors.black,
+                  size: 22,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Créer un service",
+                    style: TextStyle(color: Colors.black, fontSize: 15)),
+              ],
+            ),
+          ),
+          ElevatedButton(
             onPressed: () {
               Navigator.push(
                   (context),
                   MaterialPageRoute(
                       builder: (context) => const RepairServiceScreen()));
             },
-            child: const Text("Mes services en ligne")),
-        OutlinedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              elevation: 0,
+            ),
+            child: Wrap(
+              children: <Widget>[
+                Icon(
+                  Icons.build_rounded,
+                  color: Colors.black,
+                  size: 22.0,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Mes services en lignes",
+                    style: TextStyle(color: Colors.black, fontSize: 15)),
+              ],
+            ),
+          ),
+          ElevatedButton(
             onPressed: () {
               Navigator.push(
                   (context),
                   MaterialPageRoute(
                       builder: (context) => const RepairDemandesScreen()));
             },
-            child: const Text("Mes demandes en attente")),
-      ],
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              elevation: 0,
+            ),
+            child: Wrap(
+              children: const <Widget>[
+                Icon(
+                  Icons.access_time_outlined,
+                  color: Colors.black,
+                  size: 24.0,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text("Mes demandes en attente",
+                    style: TextStyle(color: Colors.black, fontSize: 15)),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
