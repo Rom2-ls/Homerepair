@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:homerepair/main.dart';
 import 'package:homerepair/model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -49,12 +50,30 @@ class _BecomeRepairScreenState extends State<BecomeRepairScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("become repair"),
+        elevation: 0,
+        backgroundColor: Colors.white.withOpacity(0),
+        title: const Text(
+          "Devenir réparateur",
+          style: TextStyle(color: dBlue),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.black,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            bottom: 15,
+          ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text("le super texte des conditions d'utilisation"),
               Form(

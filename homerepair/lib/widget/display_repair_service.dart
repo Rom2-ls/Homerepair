@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:homerepair/main.dart';
 
 class RepairServiceScreen extends StatefulWidget {
   const RepairServiceScreen({Key? key}) : super(key: key);
@@ -13,8 +14,24 @@ class _RepairServiceScreenState extends State<RepairServiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xFFEDECF2),
         appBar: AppBar(
-          title: const Text("Mes services"),
+          backgroundColor: Colors.white.withOpacity(0),
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text(
+            "Mes services",
+            style: TextStyle(color: dBlue),
+          ),
           centerTitle: true,
         ),
         body: const Center(

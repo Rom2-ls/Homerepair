@@ -146,11 +146,22 @@ class Demande extends StatelessWidget {
                 style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               const SizedBox(height: 20),
-              OutlinedButton(
-                  onPressed: () {
-                    deleteDemande(demId);
-                  },
-                  child: const Text('Supprimer la demande'))
+              ElevatedButton(
+                onPressed: () {
+                  deleteDemande(demId);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  shape: StadiumBorder(),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  'Supprimer la demande',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 109, 108, 108),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

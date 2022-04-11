@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:homerepair/main.dart';
 
 class RepairDemandesScreen extends StatefulWidget {
   const RepairDemandesScreen({Key? key}) : super(key: key);
@@ -14,8 +15,24 @@ class _RepairDemandesScreenState extends State<RepairDemandesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xFFEDECF2),
         appBar: AppBar(
-          title: const Text("Demandes en attente"),
+          backgroundColor: Colors.white.withOpacity(0),
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text(
+            "Demandes en attente",
+            style: TextStyle(color: dBlue),
+          ),
           centerTitle: true,
         ),
         body: const Center(
@@ -46,7 +63,7 @@ class _DisplayRepairDemandesState extends State<DisplayRepairDemandes> {
             decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)))),
+                    borderRadius: BorderRadius.all(Radius.circular(50)))),
           ),
         ),
         const Expanded(

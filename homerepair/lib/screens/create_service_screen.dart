@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:homerepair/main.dart';
 import 'package:homerepair/model/user_model.dart';
 
 class CreateServiceScreen extends StatefulWidget {
@@ -67,9 +68,13 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.home_repair_service),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Service",
+        labelText: "Service",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(50),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: dBlue),
+          borderRadius: BorderRadius.circular(50),
         ),
       ),
     );
@@ -92,9 +97,13 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.monetization_on),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Prix",
+        labelText: "Prix",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(50),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: dBlue),
+          borderRadius: BorderRadius.circular(50),
         ),
       ),
     );
@@ -113,26 +122,54 @@ class _CreateServiceScreenState extends State<CreateServiceScreen> {
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.description),
         contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Description",
+        labelText: "Description",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: dBlue),
+          borderRadius: BorderRadius.circular(30),
         ),
       ),
     );
 
     // upload button
-    final uploadButton = ElevatedButton(
-      onPressed: () {
-        if (_formKey.currentState!.validate()) {
-          _uploadNewService();
-        }
-      },
-      child: const Text("Créer le service"),
+    final uploadButton = SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: dRed,
+            shape: const StadiumBorder(),
+            padding: const EdgeInsets.all(13)),
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            _uploadNewService();
+          }
+        },
+        child: const Text("Créer le service"),
+      ),
     );
 
     return Scaffold(
+      backgroundColor: const Color(0xFFEDECF2),
       appBar: AppBar(
-        title: const Text("Créer un service"),
+        backgroundColor: Colors.white.withOpacity(0),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          'Créer un service',
+          style: TextStyle(color: dBlue),
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: SingleChildScrollView(
